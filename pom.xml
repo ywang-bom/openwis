@@ -8,118 +8,12 @@
    <name>OpenWis</name>
 
    <scm>
-      <connection>scm:git:git@github.com:OpenWIS/openwis.git</connection>
-      <developerConnection>scm:git:git@github.com:OpenWIS/openwis.git</developerConnection>
-      <url>https://github.com/OpenWIS/openwis</url>
+      <connection>scm:git:ssh://git@github.com/OpenWIS/openwis.git</connection>
+      <developerConnection>scm:git:ssh://git@github.com/OpenWIS/openwis.git</developerConnection>
+      <url>https://github.com/OpenWIS/openwis.git</url>
    </scm>
 
-    <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <file.encoding>UTF-8</file.encoding>	  
-   </properties>
-   
-   <profiles>
-       <profile>
-         <id>all</id>
-		  <properties>
-			 <admin.module>false</admin.module>	 
-			 <user.module>true</user.module>	 			 
-		  </properties>		 
-		 <modules>
-			<module>openwis-harness</module>
-			<module>openwis-management</module>
-			<module>openwis-dataservice</module>
-			<module>openwis-metadataportal</module>
-			<module>openwis-securityservice</module>
-			<!--<module>openwis-stagingpost</module>-->
-         </modules>
-      </profile>
-      <profile>
-         <id>user</id>
-		  <properties>
-			 <admin.module>false</admin.module>	 
-			 <user.module>true</user.module>	 			 
-		  </properties>		 
-		 <modules>
-            <module>openwis-metadataportal/openwis-portal</module>
-         </modules>
-      </profile>
-      <profile>
-         <id>admin</id>
-		 <properties>
-			 <admin.module>true</admin.module>
-			 <user.module>false</user.module>			 
-	     </properties>
-         <modules>
-            <module>openwis-metadataportal/openwis-portal</module>
-         </modules>
-      </profile>
-   </profiles>
-   
-   <build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.2</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-
-      <pluginManagement>
-         <plugins>
-            <plugin>
-               <groupId>org.codehaus.mojo</groupId>
-               <artifactId>build-helper-maven-plugin</artifactId>
-               <version>1.5</version>
-            </plugin>
-            <plugin>
-			    <artifactId>maven-jar-plugin</artifactId>
-	            <configuration>
-	                <archive>
-						<addMavenDescriptor/>
-	                    <manifest>
-						    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						    <addDefaultSpecificationEntries/>		
-	                    </manifest>
-	                </archive>
-	            </configuration>
-            </plugin>
-			
-			<!--this adds the javaee.jar to the local repo, as it is currently unavailable in any internet facing repositories-->
-			<!-- 02/07/14 Shaun Adams UK Met Office-->
-			<plugin>
-               <groupId>org.codehaus.mojo</groupId>
-               <artifactId>exec-maven-plugin</artifactId>
-               <version>1.2.1</version>
-			   <executions>
-					<execution>
-					<id>install-javaee-jar</id>
-					<phase>install</phase>
-					<goals>
-						<goal>exec</goal>
-					</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>mvn</executable>
-					<arguments>
-						<argument>install:install-file</argument>
-						<argument>-Dfile=${basedir}/resources/javaee-5.0.jar</argument>
-						<argument>-DgroupId=com.sun.javaee</argument>
-						<argument>-DartifactId=javaee</argument>
-						<argument>-Dversion=5.0</argument>
-						<argument>-Dpackaging=jar</argument>
-					</arguments>
-				</configuration>
-            </plugin>	
-         </plugins>
-      </pluginManagement>
-   </build>
-   
-   <organization>
+    <organization>
       <name>AKKA informatique &amp; Systèmes</name>
       <url>http://www.akka.eu</url>
    </organization>
@@ -229,15 +123,141 @@
          </roles>
          <timezone>GMT+1</timezone>
       </developer>
+	  <developer>
+         <id>sdadams</id>
+         <name>Shaun Adams</name>
+         <email>shaun.adams@metoffice.gov.uk</email>
+         <organization>Met Office</organization>
+         <organizationUrl>http://www.metoffice.gov.uk</organizationUrl>
+         <roles>
+            <role>Software Configuration Manager</role>
+			<role>Build Manager</role>
+         </roles>
+         <timezone>GMT</timezone>
+      </developer>
    </developers>
    
-	  <pluginRepositories>
+   
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <file.encoding>UTF-8</file.encoding>	  
+   </properties>
+   
+   
+   <profiles>
+       <profile>
+         <id>all</id>
+		  <properties>
+			 <admin.module>false</admin.module>	 
+			 <user.module>true</user.module>	 			 
+		  </properties>		 
+		 <modules>
+			<module>openwis-harness</module>
+			<module>openwis-management</module>
+			<module>openwis-dataservice</module>
+			<module>openwis-metadataportal</module>
+			<module>openwis-securityservice</module>
+			<!--<module>openwis-stagingpost</module>-->
+         </modules>
+      </profile>
+      <profile>
+         <id>user</id>
+		  <properties>
+			 <admin.module>false</admin.module>	 
+			 <user.module>true</user.module>	 			 
+		  </properties>		 
+		 <modules>
+            <module>openwis-metadataportal/openwis-portal</module>
+         </modules>
+      </profile>
+      <profile>
+         <id>admin</id>
+		 <properties>
+			 <admin.module>true</admin.module>
+			 <user.module>false</user.module>			 
+	     </properties>
+         <modules>
+            <module>openwis-metadataportal/openwis-portal</module>
+         </modules>
+      </profile>
+   </profiles>
+   
+   <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>build-helper-maven-plugin</artifactId>
+               <version>1.5</version>
+            </plugin>
+            <plugin>
+			    <artifactId>maven-jar-plugin</artifactId>
+	            <configuration>
+	                <archive>
+						<addMavenDescriptor/>
+	                    <manifest>
+						    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						    <addDefaultSpecificationEntries/>		
+	                    </manifest>
+	                </archive>
+	            </configuration>
+            </plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>1.0</version>
+			</plugin>	
+			
+			<!--this adds the javaee.jar to the local repo, as it is currently unavailable in any internet facing repositories-->
+			<!-- 02/07/14 Shaun Adams UK Met Office-->
+			<plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>exec-maven-plugin</artifactId>
+               <version>1.2.1</version>
+			   <executions>
+					<execution>
+					<id>install-javaee-jar</id>
+					<phase>install</phase>
+					<goals>
+						<goal>exec</goal>
+					</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>mvn</executable>
+					<arguments>
+						<argument>install:install-file</argument>
+						<argument>-Dfile=${basedir}/resources/javaee-5.0.jar</argument>
+						<argument>-DgroupId=com.sun.javaee</argument>
+						<argument>-DartifactId=javaee</argument>
+						<argument>-Dversion=5.0</argument>
+						<argument>-Dpackaging=jar</argument>
+					</arguments>
+				</configuration>
+            </plugin>	
+         </plugins>
+      </pluginManagement>
+   </build>
+   
+	<pluginRepositories>
 		<pluginRepository>
 		  <name>oss.sonatype.org</name>
 		  <id>oss.sonatype.org</id>
 		  <url>https://oss.sonatype.org/content/groups/public</url>
 		</pluginRepository>
-	  </pluginRepositories>
+	</pluginRepositories>
    <repositories>
 	  <repository>
          <id>openwis-releases</id>
