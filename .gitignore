@@ -7,5 +7,4 @@ target/
 .settings/
 
 # Ignore Maven files
- 
- *.versionsBackup
+*.versionsBackup
